@@ -1,1 +1,117 @@
 
+#include <iostream>
+
+#include <vector>
+
+#include <queue>
+
+#include <unordered_set>
+
+
+using namespace std;
+
+
+// Node class for the graph
+
+class Node {
+
+public:
+
+    int value;
+
+    vector<Node*> adjacent_nodes;
+
+
+    Node(int value) {
+
+        this->value = value;
+
+    }
+
+
+    void add_adjacent(Node* node) {
+
+        adjacent_nodes.push_back(node);
+
+    }
+
+};
+
+
+// BFS function
+
+void bfs(Node* start_node) {
+
+    unordered_set<Node*> visited;  // set to keep track of visited nodes
+
+    queue<Node*> q;  // queue to keep track of nodes to visit
+
+    visited.insert(start_node);
+
+    q.push(start_node);
+
+
+    while (!q.empty()) {
+
+        Node* node = q.front();
+
+        q.pop();
+
+        cout << node->value << " ";
+
+
+        for (Node* adjacent : node->adjacent_nodes) {
+
+            if (visited.find(adjacent) == visited.end()) {
+
+                visited.insert(adjacent);
+
+                q.push(adjacent);
+
+            }
+
+        }
+
+    }
+
+}
+
+
+int main() {
+
+    // Create nodes
+
+    Node* node1 = new Node(1);
+
+    Node* node2 = new Node(2);
+
+    Node* node3 = new Node(3);
+
+    Node* node4 = new Node(4);
+
+    Node* node5 = new Node(5);
+
+
+    // Create edges
+
+    node1->add_adjacent(node2);
+
+    node1->add_adjacent(node3);
+
+    node2->add_adjacent(node4);
+
+    node3->add_adjacent(node4);
+
+    node3->add_adjacent(node5);
+
+    node4->add_adjacent(node5);
+
+
+    // Perform BFS starting from node1
+
+    bfs(node1);
+
+
+    return 0;
+
+}
