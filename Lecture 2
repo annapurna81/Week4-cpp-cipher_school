@@ -1,1 +1,36 @@
+//on Leet code
+class Solution{
+public:
+bool hasCycle(ListNode *head){
+unordered_map<ListNode *,int>mp;
+ListNode *t = head;
 
+while(t){
+if(mp.count(t->next))return 1;
+
+mp[t]++;
+t=t->next;
+}
+return 0;
+
+}
+};
+
+program:
+
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int main(){
+vector<string> solar_sys = {"mer", "venus", "earth", "mars", "jupitor", "saturn", "naptune", "uranus"};
+
+vector<string>::iterator shivam = solar_sys.begin();
+vector<string>::iterator champa = solar_sys.begin();
+
+advance(shivam,3);
+cout<<*shivam<<endl;
+//cout<<"let's go to earth "<<*(shivam+2)<<endl;
+
+return 0;
+}
